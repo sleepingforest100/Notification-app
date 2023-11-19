@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Deeplinks</string>
+    <string name="show_message">Show message</string>
+    <string name="hide_message">Hide message</string>
+</resources>

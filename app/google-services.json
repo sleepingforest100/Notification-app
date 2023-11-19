@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1011680168677",
+    "project_id": "notification-app-3e1d2",
+    "storage_bucket": "notification-app-3e1d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011680168677:android:e42868dc81fe2961e4a20c",
+        "android_client_info": {
+          "package_name": "kz.just_code.deeplinks"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOTJjwCLrDvsTGflpr63OfV0QN1xCDvnE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
