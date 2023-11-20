@@ -3,11 +3,15 @@ package kz.just_code.deeplinks
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.os.Build
+import android.os.Bundle
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import androidx.navigation.NavDeepLinkBuilder
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -23,7 +27,13 @@ class NotificationService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 //        showMessage(createNotification(message.notification?.title, message.notification?.body))
-        showMessage(createNotification(message.data["title"], message.data["body"],message.data["sub_title"]))
+        showMessage(
+            createNotification(
+                message.data["title"],
+                message.data["body"],
+                message.data["sub_title"]
+            )
+        )
 //        Log.e(
 //            "MESSAGE",
 //            "message: ${message.notification?.body} ,title: ${message.notification?.title}"
@@ -43,8 +53,17 @@ class NotificationService : FirebaseMessagingService() {
             .setSubText(subtitle)
             .setColor(ContextCompat.getColor(baseContext, R.color.red))
             .setOngoing(false)
-//        .setLights()
             .setVibrate(LongArray(250))
+            .setContentIntent(
+                createPendingIntent(
+                    bundleOf(
+                        "action" to "open",
+                        "name" to "Hello"
+                    )
+                )
+            )
+//        .setLights()
+
 //        .setSound()
 //            .addAction(android.R.drawable.ic_delete, "delete", getDeleteAction(context))
 //            .addAction(android.R.drawable.ic_dialog_alert, "show", getShowAction(context))
@@ -83,4 +102,14 @@ class NotificationService : FirebaseMessagingService() {
         manager.notify(4567, notification)
     }
 
+    private fun createPendingIntent(
+        args: Bundle?
+    ): PendingIntent {
+        return NavDeepLinkBuilder(baseContext)
+            .setComponentName(MainActivity::class.java)
+            .setGraph(R.navigation.nav_graph)
+            .setDestination(R.id.secondFragment)
+            .setArguments(args)
+            .createPendingIntent()
+    }
 }

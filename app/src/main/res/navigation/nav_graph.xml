@@ -8,4 +8,8 @@
         android:id="@+id/startFragment"
         android:name="kz.just_code.deeplinks.StartFragment"
         android:label="StartFragment" />
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="kz.just_code.deeplinks.SecondFragment"
+        android:label="SecondFragment" />
 </navigation>
