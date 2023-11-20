@@ -1,6 +1,7 @@
 package kz.just_code.deeplinks
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,12 @@ class StartFragment: Fragment() {
         }
         binding.hideButton.setOnClickListener {
             notificationManager.clear(requireContext())
+        }
+
+        requireActivity().intent.data?.let {
+            it.queryParameterNames.forEach { name ->
+                Log.e(">>>", "$name: ${it.getQueryParameter(name)}")
+            }
         }
     }
 }

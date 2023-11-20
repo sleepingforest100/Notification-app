@@ -4,7 +4,6 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -12,8 +11,6 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavDeepLinkBuilder
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -31,7 +28,9 @@ class NotificationService : FirebaseMessagingService() {
             createNotification(
                 message.data["title"],
                 message.data["body"],
-                message.data["sub_title"]
+                message.data["sub_title"],
+                message.data["btn_name"],
+
             )
         )
 //        Log.e(
@@ -44,7 +43,8 @@ class NotificationService : FirebaseMessagingService() {
     private fun createNotification(
         title: String?,
         message: String?,
-        subtitle: String? = null
+        subtitle: String? = null,
+        name: String?
     ): Notification {
         return NotificationCompat.Builder(baseContext, getChannelId())
             .setSmallIcon(R.drawable.ic_icon)
@@ -57,8 +57,7 @@ class NotificationService : FirebaseMessagingService() {
             .setContentIntent(
                 createPendingIntent(
                     bundleOf(
-                        "action" to "open",
-                        "name" to "Hello"
+                        "name" to name
                     )
                 )
             )
