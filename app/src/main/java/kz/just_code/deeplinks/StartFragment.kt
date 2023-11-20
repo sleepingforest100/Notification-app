@@ -28,14 +28,9 @@ class StartFragment: Fragment() {
         binding.showButton.setOnClickListener {
             notificationManager.showMessage(requireContext())
         }
-        binding.hideButton.setOnClickListener {
+        binding.clearButton.setOnClickListener {
             notificationManager.clear(requireContext())
         }
 
-        requireActivity().intent.data?.let {
-            it.queryParameterNames.forEach { name ->
-                Log.e(">>>", "$name: ${it.getQueryParameter(name)}")
-            }
-        }
     }
 }

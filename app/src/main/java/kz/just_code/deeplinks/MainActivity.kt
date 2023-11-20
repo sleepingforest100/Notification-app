@@ -29,12 +29,6 @@ class MainActivity : AppCompatActivity() {
 //        if (intent.hasExtra("ACTION")) {
 //            Toast.makeText(this, intent.getStringExtra("ACTION"), Toast.LENGTH_SHORT).show()
 //        }
-
-        intent.data?.let {
-            it.queryParameterNames.forEach { name ->
-                Log.e(">>>>", "$name : ${it.getQueryParameter(name)}")
-            }
-        }
     }
 
     private var pushPermissionLauncher =
